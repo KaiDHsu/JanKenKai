@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>JanKen</title>
+    <meta name="description" content="Simple UI for JanKen">
+    <meta name="author" content="David Hsu">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Nova+Square" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/janken.css">
+    <script type="text/javascript" src="js/janken.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>JANKEN - Rock, Paper, Scissors</h1>
+    </header>
+    <section class="scores" style="display:none;">
+        <h1>Scoreboard</h1>
+        <div>
+            <div class="wins">
+                <h3>WINS</h3>
+                <canvas id="wins" width="100" height="50"></canvas>
+            </div>
+            <div class="losses">
+                <h3>LOSSES</h3>
+                <canvas id="losses" width="100" height="50"></canvas>
+            </div>
+            <div class="draws">
+                <h3>DRAWS</h3>
+                <canvas id="draws" width="100" height="50"></canvas>
+            </div>
+        </div>
+    </section>
+    <section class="timers">
+        <h1>Timer Settings</h1>
+        <div>
+            <form id="timerForm">
+                <div class="timerInput">
+                    <div>
+                        <label>Minutes
+                            <input id="minutes" type="number" name="minutes" placeholder="Enter minutes >= 0" min="0" required>
+                        </label>
+                    </div>
+                    <div>
+                        <label>Seconds
+                            <input id="seconds" type="number" name="seconds" placeholder="Enter seconds >= 0" min="0" required>
+                        </label>
+                    </div>
+                </div>
+                <div class="timerSubmits">
+                    <button id="start" value="start">Start</button>
+                    <button id="restart" style="display:none;" disabled>Restart</button>
+                </div>
+            </form>
+            <div class="timerDisplay" style="display:none;">
+                <h1>COUNTDOWN TIMER</h1>
+                <canvas id="timerDisplay" width="340" height="70"></canvas>
+            </div>
+        </div>
+    </section>
+    <section class="janken" style="display:none;">
+        <div class="player">
+            <h1>Select Play</h1>
+            <button class="rock selectionBtn" value="rock" disabled></button>
+            <button class="paper selectionBtn" value="paper" disabled></button>
+            <button class="scissor selectionBtn" value="scissor" disabled></button>
+        </div>
+        <div class="npc">
+            <h1>Player Choice</h1>
+            <div id="playerSelection" class="selection"></div>
+            <h1>Computer Choice</h1>
+            <div id="cpuSelection" class="selection"></div>
+        </div>
+    </section>
+    <section class="resultModal">
+        <div class="modalContent">
+            <div id="gameResult"></div>
+            <div id="resultScore"></div>
+        </div>
+    </section>
+</body>
+
+</html>

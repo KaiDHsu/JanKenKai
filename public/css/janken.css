@@ -1,0 +1,223 @@
+html {
+    background: linear-gradient(160deg, #2CB5EA 25%, #1FC8E0 50%, #0FB8B0 95%);
+    background-attachment: fixed;
+    height: 100%
+}
+
+body {
+    padding: 0px;
+    min-width: 400px;
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+    background: linear-gradient(180deg, lightgrey 5%, ghostwhite 40%, white 50%);
+    font-family: 'Nova Square', cursive;
+    min-height: 100%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+header {
+    border-bottom: 5px solid #2CB5EA;
+    padding: 20px;
+}
+
+header h1 {
+    margin: 0px;
+}
+
+.scores h3,
+.timerDisplay h1 {
+    margin-bottom: 0px;
+}
+
+.rock {
+    background-image: url(../images/rock.png);
+}
+
+.paper {
+    background-image: url(../images/paper.png);
+}
+
+.scissor {
+    background-image: url(../images/scissor.png);
+}
+
+.selectionBtn,
+.selection {
+    background-size: 100%;
+    width: 115px;
+    height: 115px;
+    outline: none;
+    border: 1px solid grey;
+    border-radius: 15px;
+    box-shadow: 5px 5px lightgrey;
+}
+
+.selection {
+    border: 5px solid grey;
+}
+
+.scores,
+.timers {
+    width: 49%;
+    max-width: 400px;
+    min-width: 380px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: top;
+}
+
+.timers {
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    transition: all 3s ease-in-out;
+}
+
+.timers > div {
+    width: 100%;
+}
+
+.scores > div {
+    padding: 15px;
+    border: 3px solid black;
+    border-radius: 40px;
+    box-shadow: 5px 5px lightgrey;
+}
+
+.scores > div > div {
+    width: 49%;
+    display: inline-block;
+}
+
+.player {
+    width: 49%;
+    display: inline-block;
+    text-align: center;
+    vertical-align: top;
+}
+
+.player > button {
+    margin: 4%;
+    cursor: pointer;
+}
+
+.player button:active {
+    box-shadow: 2px 2px darkgrey;
+    transform: translateY(3px);
+}
+
+button[disabled] {
+    opacity: 0.5;
+}
+
+.npc {
+    width: 49%;
+    max-width: 400px;
+    display: inline-block;
+    text-align: center;
+}
+
+.npc > div {
+    display: inline-block;
+    min-width: 115px;
+    max-height: 115px;
+    margin-bottom: 10%;
+}
+
+.janken {
+    width: 100%;
+}
+
+.timerInput input {
+    width: 155px;
+    height: 30px;
+    margin: 10px;
+    display: block;
+    font-family: 'Nova Square', cursive;
+    text-align: center;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+.timerInput label {
+    display: block;
+}
+
+.timerInput > div {
+    display: inline-block;
+}
+
+.timerSubmits button {
+    width: 110px;
+    height: 50px;
+    margin: 10px 35px 30px 35px;
+    cursor: pointer;
+    font-size: 30px;
+    font-family: 'Nova Square', cursive;
+    outline: none;
+    color: white;
+    background-color: green;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 5px 5px lightgrey;
+}
+
+.timerSubmits button:active {
+    background-color: darkgreen;
+    box-shadow: 2px 2px darkgrey;
+    transform: translateY(3px);
+}
+
+.timerSubmits button[value='stop'] {
+    background-color: red;
+}
+
+#timerDisplay {
+    margin: 0px 10px 10px 10px;
+}
+
+.win {
+    border: 5px solid green;
+    color: green;
+}
+
+.lose {
+    border: 5px solid red;
+    color: red;
+}
+
+.resultModal {
+    display: none;
+    background: rgba(128,128,128,0.5);
+    z-index: 1;
+    position: fixed;
+    width: 900px;
+    height: 100%;
+    top: 0px;
+}
+
+.modalContent {
+    background: white;
+    position: fixed;
+    top: 50%;
+    height: 160px;
+    margin-top: -80px;
+    width: 900px;
+}
+
+#gameResult {
+    font-size: 3em;
+    margin: 20px 0px;
+    border: none;
+}
+
+#resultScore {
+    font-size: 2em;
+    margin-top: 20px;
+}
