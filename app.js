@@ -6,28 +6,30 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var reqall = require('require-all');
+var requireAll = require('require-all');
 var app = express();
 
-reqall({
+requireAll({
     dirname: __dirname + '/models',
     recursive: true
 });
+mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://public:public1@ds031257.mlab.com:31257/kaidb');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+app.set('secretTokenKey', 'hideThisInServerConfigsPlease');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', objectToArray(reqall({
+app.use('/', objectToArray(requireAll({
     dirname: __dirname + '/routes',
     recursive: true
 })));
@@ -62,7 +64,6 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-
 
 module.exports = app;
 
