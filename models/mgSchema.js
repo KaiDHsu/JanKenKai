@@ -15,11 +15,11 @@ var userSchema = new mongoose.Schema({
 
 userSchema.methods.crpytPassword = function(pw) {
     this.salt = crypto.randomBytes(16).toString('hex');
-    this.hash = crypto.pbkdf2Sync(pw, this.salt, 1000, 64).toString('hex');
+    this.hash = crypto.pbkdf2Sync(pw, this.salt, 1000, 64, 'sha512').toString('hex');
 };
 
 userSchema.methods.isValidPassword = function(pw) {
-    var hash = crypto.pbkdf2Sync(pw, this.salt, 1000, 64).toString('hex');
+    var hash = crypto.pbkdf2Sync(pw, this.salt, 1000, 64, 'sha512').toString('hex');
     return this.hash === hash;
 };
 
