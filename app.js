@@ -90,17 +90,21 @@ module.exports = app;
 
 function objectToArray(obj) {
     var result = [];
-
     for (var key in obj) {
         if (typeof obj[key] === 'object') {
-            console.log('entered');
             var resArr = objectToArray(obj[key]);
             resArr.forEach(function(item) {
                 result.push(item);
             });
         } else {
-            result.push(obj[key]);
+            /* hacky fix to load index first */
+            if(key === 'routeConfig') {
+                result.unshift(obj[key]);
+            } else {
+                result.push(obj[key]);
+            }
         }
     }
+
     return result;
 }
