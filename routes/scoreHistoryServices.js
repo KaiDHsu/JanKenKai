@@ -11,6 +11,7 @@ router.post('/storeScore', function(req, res, next) {
         .then(function success(resp) {
             var score = resp;
             req.user.history.push(score);
+            /* Is this really how this needs to be done? This seems inefficient. TODO - look into mongoose/mongo structures */
             req.user.save()
                 .then(function success(resp) {
                     res.status(201);
