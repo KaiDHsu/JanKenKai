@@ -4,6 +4,7 @@
 This Repo is forked from my other Project JanKen.
 
 JanKen was created as an item for an interview. Unfortunately, the contraints of the task limited me to only using JQuery.
+I did however play around with Canvas elements and decided to use them for a few of the sections in the UI.
 
 I've decided to double back and hook it up with a NodeJS sever and MongoDB.
 
