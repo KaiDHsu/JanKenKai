@@ -5,51 +5,59 @@ var History = mongoose.model('History');
 
 router.post('/storeScore', function(req, res, next) {
     var history = new History(req.body);
+    history.user = req.user;
 
     history.save()
         .then(function success(resp) {
-            res.status(201);
-            res.send({
-                message: "User successfully created."
-            });
-        }, function error(err) {
-            if (err.code === 11000) {
-                res.status(409);
-                res.send({
-                    error: 'Username already exists'
+            var score = resp;
+            req.user.history.push(score);
+            req.user.save()
+                .then(function success(resp) {
+                    res.status(201);
+                    res.send({
+                        success: true,
+                        resp: resp,
+                        message: "Scores successfully saved."
+                    });
+                }, function error(err) {
+                    res.status(500);
+                    res.send({
+                        success: false,
+                        message: "Error saving scores."
+                    });
                 });
-            } else {
-                res.status(500);
-                res.send(err);
-            }
+
+        }, function error(err) {
+            res.status(500);
+            res.send({
+                success: false,
+                message: "Error saving scores."
+            });
         });
 });
 
 router.post('/retreiveHistory', function(req, res, next) {
-    var username = req.body.username;
-    var pass = req.body.pass;
-
-    History.findOne({ username: username })
+    req.user.populate('history', 'wins losses draws date').execPopulate()
         .then(function success(resp) {
-            var history = resp;
-            if (!history) {
-                res.status(404);
+            var user = resp;
+            if (user) {
                 res.send({
-                    error: "Username not Found"
-                });
-            } else if (user.isValidPassword(pass)) {
-                res.send({
-                    message: "Successful Login"
+                    success: true,
+                    message: user.history
                 });
             } else {
                 res.status(500);
                 res.send({
-                    message: "Unsuccessful Login"
+                    success: false,
+                    message: "Error Occured."
                 });
             }
         }, function error(err) {
             res.status(500);
-            res.send("error");
+            res.send({
+                success: false,
+                message: "Error Occured."
+            });
         });
 });
 

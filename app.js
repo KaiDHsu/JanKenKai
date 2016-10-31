@@ -14,7 +14,7 @@ requireAll({
     recursive: true
 });
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://public:public1@ds031257.mlab.com:31257/kaidb');
+mongoose.connect('mongodb://public:public1@ds059722.mlab.com:59722/kaidb');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
