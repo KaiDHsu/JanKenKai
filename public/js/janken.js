@@ -20,12 +20,83 @@ $(function() {
         playerSelectionRef = $('#playerSelection'),
         modalRef = $('.resultModal'),
         gameResultRef = $('#gameResult'),
-        resultScoreRef = $('#resultScore');
+        resultScoreRef = $('#resultScore'),
+        loginRegister = $('#loginRegister'),
+        loginForm = $('#loginForm'),
+        registerBtn = $('#register'),
+        loginBtn = $('#login'),
+        guestBtn = $('#guestBtn'),
+        loginSection = $('.Login'),
+        timersSection = $('.timers'),
+        loginError = $('#loginError'),
+        historySection = $('.history'),
+        history = $('#history'),
+        sessionToken;
 
     winCTX.font = loseCTX.font = drawCTX.font = timerCTX.font = "30px Nova Square";
     winCTX.textAlign = loseCTX.textAlign = drawCTX.textAlign = timerCTX.textAlign = "center";
     winCTX.fillStyle = 'green';
     loseCTX.fillStyle = 'red';
+
+    loginRegister.on('click', function(event) {
+        loginRegister.hide(100);
+        loginForm.show(500);
+    });
+
+    registerBtn.on('click', function(event) {
+        if (loginForm[0].checkValidity()) {
+            registerBtn.prop('disabled', true);
+            loginBtn.prop('disabled', true);
+
+            $.ajax({
+                type: "POST",
+                url: '/createUser',
+                data: {
+                    username: $('#username').val(),
+                    pass: $('#password').val()
+                },
+                dataType: 'json'
+            }).then(function(resp) {
+                sessionToken = resp.sessionToken;
+                loginSection.hide(250);
+                timersSection.show(500);
+            }, function(err) {
+                registerBtn.prop('disabled', false);
+                loginBtn.prop('disabled', false);
+                loginError.text(err.responseJSON.message || err.message);
+            });
+        }
+    });
+
+    loginBtn.on('click', function(event) {
+        if (loginForm[0].checkValidity()) {
+            registerBtn.prop('disabled', true);
+            loginBtn.prop('disabled', true);
+
+            $.ajax({
+                type: "POST",
+                url: '/login',
+                data: {
+                    username: $('#username').val(),
+                    pass: $('#password').val()
+                },
+                dataType: 'json'
+            }).then(function(resp) {
+                sessionToken = resp.sessionToken;
+                loginSection.hide(250);
+                timersSection.show(500);
+            }, function(err) {
+                registerBtn.prop('disabled', false);
+                loginBtn.prop('disabled', false);
+                loginError.text(err.responseJSON.message || err.message);
+            });
+        }
+    });
+
+    guestBtn.on('click', function(event) {
+        loginSection.hide(250);
+        timersSection.show(500);
+    });
 
     /* event bind for on click on start */
     startRef.on('click', function(event) {
@@ -40,6 +111,7 @@ $(function() {
             choiceRef.show(500);
             scoreRef.show(500);
             timerDisplayRef.show(200);
+            retrieveScores();
             gameStarter();
         } else if (event.target.value === 'stop') {
             timerCTX.clearRect(0, 0, 340, 70);
@@ -190,8 +262,9 @@ $(function() {
             gameResultRef.html("You Lose...");
             gameResultRef.addClass("lose");
         }
-        resultScoreRef.html(wins +" vs "+losses);
-        modalRef.fadeIn().delay(2000).fadeOut(function(){gameResultRef.removeClass("win lose")});
+        resultScoreRef.html(wins + " vs " + losses);
+        saveScores(retrieveScores);
+        modalRef.fadeIn().delay(2000).fadeOut(function() { gameResultRef.removeClass("win lose") });
     };
 
     resetButtons = function() {
@@ -202,4 +275,52 @@ $(function() {
         minutesRef.prop({ 'disabled': false, 'required': true, 'min': 0 });
         secondsRef.prop({ 'disabled': false, 'required': true, 'min': 0 });
     };
+
+    retrieveScores = function(doneCallback) {
+        if (sessionToken) {
+            $.ajax({
+                type: "GET",
+                headers: {
+                    "x-access-token": sessionToken
+                },
+                url: '/retreiveHistory',
+                dataType: 'json'
+            }).then(function(resp) {
+                history.text(JSON.stringify(resp));
+                historySection.show(500);
+            }, function(err) {
+
+            }).done(function() {
+                if(doneCallback) {
+                    doneCallback();
+                }
+            });
+        }
+    };
+
+    saveScores = function(doneCallback) {
+        if (sessionToken) {
+            $.ajax({
+                type: "POST",
+                headers: {
+                    "x-access-token": sessionToken
+                },
+                url: '/storeScore',
+                data: {
+                    "wins": wins,
+                    "losses": losses,
+                    "draws": draws
+                },
+                dataType: 'json'
+            }).then(function(resp) {
+                
+            }, function(err) {
+
+            }).done(function() {
+                if(doneCallback) {
+                    doneCallback();
+                }
+            });
+        }
+    }
 });

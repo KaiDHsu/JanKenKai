@@ -16,7 +16,34 @@
     <header>
         <h1>JANKEN - Rock, Paper, Scissors</h1>
     </header>
-    <section class="scores" style="display:none;">
+    <section class="Login">
+        <div class="loginSubmits">
+            <button id="loginRegister">Login/Register</button>
+        </div>
+        <form id="loginForm" style="display: none;">
+            <div class="loginInput">
+                <div>
+                    <label>Username:
+                        <input id="username" type="text" name="username" placeholder="John" min="0" required>
+                    </label>
+                </div>
+                <div>
+                    <label>Password:
+                        <input id="password" type="password" name="pass" placeholder="******" min="0" required>
+                    </label>
+                </div>
+                <div id="loginError"></div>
+            </div>
+            <div class="loginSubmits entrySubmits">
+                <button id="register">Register</button>
+                <button id="login">Login</button>
+            </div>
+        </form>
+        <div class="loginSubmits">
+            <button id="guestBtn">Continue as Guest</button>
+        </div>
+    </section>
+    <section class="scores" style="display: none;">
         <h1>Scoreboard</h1>
         <div>
             <div class="wins">
@@ -33,7 +60,7 @@
             </div>
         </div>
     </section>
-    <section class="timers">
+    <section class="timers" style="display: none;">
         <h1>Timer Settings</h1>
         <div>
             <form id="timerForm">
@@ -51,16 +78,16 @@
                 </div>
                 <div class="timerSubmits">
                     <button id="start" value="start">Start</button>
-                    <button id="restart" style="display:none;" disabled>Restart</button>
+                    <button id="restart" style="display: none;" disabled>Restart</button>
                 </div>
             </form>
-            <div class="timerDisplay" style="display:none;">
+            <div class="timerDisplay" style="display: none;">
                 <h1>COUNTDOWN TIMER</h1>
                 <canvas id="timerDisplay" width="340" height="70"></canvas>
             </div>
         </div>
     </section>
-    <section class="janken" style="display:none;">
+    <section class="janken" style="display: none;">
         <div class="player">
             <h1>Select Play</h1>
             <button class="rock selectionBtn" value="rock" disabled></button>
@@ -73,6 +100,10 @@
             <h1>Computer Choice</h1>
             <div id="cpuSelection" class="selection"></div>
         </div>
+    </section>
+    <section class="history" style="display: none;">
+        <h1>History</h1>
+        <div id="history"></div>
     </section>
     <section class="resultModal">
         <div class="modalContent">

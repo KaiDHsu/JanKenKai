@@ -42,7 +42,7 @@ router.post('/login', function(req, res, next) {
             var user = resp;
             if (!user) {
                 res.status(404);
-                res.send({
+                res.json({
                     success: false,
                     message: "Username not Found"
                 });

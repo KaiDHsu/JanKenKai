@@ -37,7 +37,7 @@ router.post('/storeScore', function(req, res, next) {
         });
 });
 
-router.post('/retreiveHistory', function(req, res, next) {
+router.get('/retreiveHistory', function(req, res, next) {
     req.user.populate('history', 'wins losses draws date').execPopulate()
         .then(function success(resp) {
             var user = resp;

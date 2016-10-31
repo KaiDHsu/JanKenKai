@@ -5,7 +5,7 @@ var User = mongoose.model('User');
 var jwt = require('jsonwebtoken');
 
 /* this file needs to be loaded before the route below in order for authentication to work and not break life,
-    so renaming and explicitely declaring in app,js */
+    so renaming and explicitely declaring in app.js */
 router.use(['/storeScore', '/retreiveHistory'], function(req, res, next) {
     var token = req.headers['x-access-token'];
 
