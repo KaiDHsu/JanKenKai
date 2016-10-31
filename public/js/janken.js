@@ -169,6 +169,10 @@ $(function() {
         event.preventDefault();
     });
 
+    loginForm.on('submit', function(event) {
+        event.preventDefault();
+    });
+    
     /* clears and redraws the score canvas, slightly optimized for performance */
     updateScores = function(outcome) {
         switch (outcome) {
