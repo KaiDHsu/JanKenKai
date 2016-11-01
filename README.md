@@ -16,6 +16,23 @@ The passwords are hashed and encrypted in node, and never stored in MongoDB, ins
 
 A sessionToken is generated upon login and expires after 1 hour.
 
+
+List of things used in respective parts:
+
+Front End:
+    JQuery
+    Mustache
+
+Services:
+    NodeJS
+    ExpressJS
+    MongooseJS
+    jsonwebtoken
+    require-all
+
+Database:
+    MongoDB
+
+
 TODOs:
-- Finish templating the History section.
 - Redirect the Player back to login after sessionToken expires
