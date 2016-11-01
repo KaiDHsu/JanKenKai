@@ -38,7 +38,7 @@ router.post('/storeScore', function(req, res, next) {
 });
 
 router.get('/retreiveHistory', function(req, res, next) {
-    req.user.populate('history', 'wins losses draws date').execPopulate()
+    req.user.populate({path: 'history', select: 'wins losses draws date', options: {sort: {date: -1}, limit: 5}}).execPopulate()
         .then(function success(resp) {
             var user = resp;
             if (user) {

@@ -194,7 +194,7 @@ button[disabled] {
 
 .resultModal {
     display: none;
-    background: rgba(128,128,128,0.5);
+    background: rgba(128, 128, 128, 0.5);
     z-index: 1;
     position: fixed;
     width: 900px;
@@ -222,7 +222,8 @@ button[disabled] {
     margin-top: 20px;
 }
 
-.Login, .loginSubmits {
+.Login,
+.loginSubmits {
     margin-top: 50px;
     margin-bottom: 25px;
 }
@@ -276,4 +277,13 @@ button[disabled] {
 
 #loginError {
     color: red;
+}
+
+#history {
+    text-align: left;
+    padding-left: 25%;
+}
+
+#history li {
+    list-style-type: none;
 }

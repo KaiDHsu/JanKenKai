@@ -172,7 +172,7 @@ $(function() {
     loginForm.on('submit', function(event) {
         event.preventDefault();
     });
-    
+
     /* clears and redraws the score canvas, slightly optimized for performance */
     updateScores = function(outcome) {
         switch (outcome) {
@@ -290,7 +290,11 @@ $(function() {
                 url: '/retreiveHistory',
                 dataType: 'json'
             }).then(function(resp) {
-                history.text(JSON.stringify(resp));
+                var template = '{{#message}}<li>{{#date}}{{formatDate}}{{/date}}   Wins: {{wins}},   Losses: {{losses}},   Draws: {{draws}}</li>{{/message}}';
+                resp.formatDate = function() {
+                    return new Date(this).toLocaleString();
+                };
+                history.html(Mustache.render(template, resp));
                 historySection.show(500);
             }, function(err) {
 
